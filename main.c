@@ -99,23 +99,24 @@ int main() {
 
 	int repeatcount;           // # of experiment for mergesort, quicksort
 	int numberOfData;
+	int rangeOfArray;		
+	int *targetedArray;
+	int n;
 	//float algorithmcost[6][4];
 	
 
 	FILE* pFile;         // Pointer for file `input1.txt`
 	pFile = fopen("input1.txt", "r");  // Open `input1.txt` via `pFile` with "r" mode
 	fscanf(pFile, "%d", &repeatcount);       // read first line to know how many we have to iterate same experiment
-	for (int n = 0; n < repeatcount; n++) {
+	for (n = 0; n < repeatcount; n++) {
 		fscanf(pFile, "%d", &numberOfData);//데이터갯수를 numberOfData에 저장
-		
 
-		int *targetedArray;
 		targetedArray = malloc(sizeof(int)*numberOfData); //동적 할당 배열 생성
 
 
 		//난수를 생성하고, 입력한다.
 		srand(time(NULL));
-		for (int rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
+		for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
 			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
 		} //numberOfData 크기의 행렬 targetedArray에 1부터 numberOfData까지의 자연수가 들어감.
 		
@@ -127,7 +128,7 @@ int main() {
 		//시행횟수 저장
 
 		//numberOfData길이의 랜덤배열 생성
-		for (int rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
+		for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
 			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
 		}
 		QuickSort(targetedArray,0,numberOfData-1);
