@@ -119,6 +119,10 @@ int main() {
 	while (!feof(inputstream)) {
 		fscanf(inputstream, "%d", &numberOfData);
 		loopcount = 0;
+		avgMsort = 0;
+		worstMsort = 0;
+		avgQsort = 0;
+		worstQsort = 0;
 
 		targetedArray = malloc(sizeof(int)*numberOfData); //allocation array
 
@@ -141,11 +145,11 @@ int main() {
 			loopcount = 0;
 
 		}
+
 		printf("%d", numberOfData);
 		printf("%16d", avgMsortSum / 10);
 		printf("%16d", worstMsortSum / 10);
-		avgMsort = 0;
-		worstMsort = 0;
+		
 		loopcount = 0;
 
 
@@ -167,8 +171,7 @@ int main() {
 		}
 		printf("%16d", avgQsortSum / 10);
 		printf("%16d\n", worstQsortSum / 10);
-		avgQsort = 0;
-		worstQsort = 0;
+		
 		loopcount = 0;
 		free(targetedArray);//free allocted memories
 
