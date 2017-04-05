@@ -140,8 +140,8 @@ int main() {
 			loopcount = 0;
 
 		}
-		printf_s("%16d", avgMsortSum / 10);
-		printf_s("%16d", worstMsortSum / 10);
+		printf("%16d", avgMsortSum / 10);
+		printf("%16d", worstMsortSum / 10);
 		loopcount = 0;
 
 
@@ -161,8 +161,8 @@ int main() {
 			worstQsortSum += loopcount;
 			loopcount = 0;
 		}
-		printf_s("%16d", avgQsortSum / 10);
-		printf_s("%16d\n", worstQsortSum / 10);
+		printf("%16d", avgQsortSum / 10);
+		printf("%16d\n", worstQsortSum / 10);
 		loopcount = 0;
 		free(targetedArray);//free allocted memories
 
@@ -179,4 +179,4 @@ int main() {
 
 
 	return 0;
-}
+}}
