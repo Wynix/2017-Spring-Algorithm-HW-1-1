@@ -1,11 +1,9 @@
 //B411048 Kim Jeong Geol
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <time.h>
-int loopcount = 0;
-
+int loopcount = 0;  //indicator that how many tries each sort took
 
 int Partition(int *data, int left, int right, int pivot) {
 	int pivotval = data[pivot];
@@ -20,10 +18,10 @@ int Partition(int *data, int left, int right, int pivot) {
 	int s = left; // save left to stored index
 	for (indexPoint = left; indexPoint < right; indexPoint++) {
 
-		// if val is less than pivot value,
+		// if value is less than pivot value,
 		if (data[indexPoint] < pivotval) {
 
-			// swap val with stored index
+			// swap value with stored index
 			temp = data[s];
 			data[s] = data[indexPoint];
 			data[indexPoint] = temp;
@@ -31,10 +29,7 @@ int Partition(int *data, int left, int right, int pivot) {
 		}
 		loopcount++;
 	}
-
-	/* swap the stored index with the right most
-	* (bring the pivot back)
-	*/
+	//swap right most and stored index for bring the pivot back
 	temp = data[s];
 	data[s] = data[right];
 	data[right] = temp;
@@ -44,10 +39,8 @@ int Partition(int *data, int left, int right, int pivot) {
 void QuickSort(int *data, int left, int right) {
 	if (left < right) {
 
-
 		int pivot = left; //set pivot = the first data of array
 		int newpivot = Partition(data, left, right, pivot);
-
 
 		QuickSort(data, left, newpivot - 1); //do quicksort for left group
 		QuickSort(data, newpivot + 1, right);//do quicksort for right group
@@ -58,7 +51,6 @@ void QuickSort(int *data, int left, int right) {
 // lefCount = number of elements in L
 // rightCount = number of elements in R. 
 void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
-
 
 	int i = 0;  // i for index of left subarray (L)
 	int j = 0;  // j for index of right subarray (R)
@@ -80,8 +72,6 @@ void MergeSort(int *A, int n) {
 
 	mid = n / 2;  // find mid and treat it as an index 
 
-
-
 	L = (int*)malloc(mid * sizeof(int));  //define left subarray and allocate meomry space
 	R = (int*)malloc((n - mid) * sizeof(int));  //define right subarray and allocate meomry space
 
@@ -101,28 +91,27 @@ int main() {
 	int numberOfData;		// scale of data
 	int rangeOfArray;		// indicator for size of array
 	int *targetedArray;		// sorted array
-	int n;					// 'for' function indicator
+	int n;				// 'for' function indicator
 	int avgMsortSum;		// loopcount for average Merge Sort
 	int worstMsortSum;		// loopcount for worst Merge Sort
 	int avgQsortSum;		// loopcount for average Quick Sort
 	int worstQsortSum;		// loopcount for worst Quick Sort
 
-
-
 	FILE* inputstream;         // make a pointer for 'input1.txt'
 	inputstream = fopen("input1.txt", "r");  // open input1.txt with "r" mode through inputstream
 	fscanf(inputstream, "%d", &repeatcount);  // read first line and save value at repeatcount
 
-	printf("rand_Merge    worst_Merge    rand_Quick    worst_Quick");
-	printf("---------------------------------------------------------------------------\n");
+	printf("Size_of_Data    rand_Merge    worst_Merge    rand_Quick    worst_Quick\n");
+	printf("-----------------------------------------------------------------------\n");
 
 	while (!feof(inputstream)) {
+
 		fscanf(inputstream, "%d", &numberOfData);
 		loopcount = 0;
-		avgMsort = 0;
-		worstMsort = 0;
-		avgQsort = 0;
-		worstQsort = 0;
+		avgMsortSum = 0;
+		worstMsortSum = 0;
+		avgQsortSum = 0;
+		worstQsortSum = 0;
 
 		targetedArray = malloc(sizeof(int)*numberOfData); //allocation array
 
@@ -149,7 +138,7 @@ int main() {
 		printf("%d", numberOfData);
 		printf("%16d", avgMsortSum / 10);
 		printf("%16d", worstMsortSum / 10);
-		
+
 		loopcount = 0;
 
 
@@ -171,21 +160,11 @@ int main() {
 		}
 		printf("%16d", avgQsortSum / 10);
 		printf("%16d\n", worstQsortSum / 10);
-		
+
 		loopcount = 0;
 		free(targetedArray);//free allocted memories
-
-
-
-
 	}
 
-
 	fclose(inputstream); // close stream
-
-
-
-
-
 	return 0;
 }
