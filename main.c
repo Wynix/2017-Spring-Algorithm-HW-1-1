@@ -113,11 +113,12 @@ int main() {
 	inputstream = fopen("input1.txt", "r");  // open input1.txt with "r" mode through inputstream
 	fscanf(inputstream, "%d", &repeatcount);  // read first line and save value at repeatcount
 
-	printf("%20s%20s%20s%20s%20s\n", "", "rand_Merge", "worst_Merge", "rand_Quick", "worst_Quick\n");
-	printf("---------------------------------------------------------------------------");
+	printf("%20s%20s%20s\n", "", "rand_Merge", "worst_Merge", "rand_Quick", "worst_Quick\n");
+	printf("---------------------------------------------------------------------------\n");
 
 	while (!feof(inputstream)) {
-		fscanf(inputstream, "%d", &numberOfData);//
+		fscanf(inputstream, "%d", &numberOfData);
+		loopcount = 0;
 
 		targetedArray = malloc(sizeof(int)*numberOfData); //allocation array
 
