@@ -120,10 +120,11 @@ int main() {
 			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
 		} //numberOfData 크기의 행렬 targetedArray에 1부터 numberOfData까지의 자연수가 들어감.
 		
-		
+		loopcount = 0;
 		MergeSort(targetedArray, numberOfData);
 		printf("%15d", loopcount);//시행횟수 저장
 		//worst배열 생성 :정렬된 배열을 사용하자. : targetedArray 재활용
+		loopcount = 0;
 		MergeSort(targetedArray, numberOfData);
 		//시행횟수 저장
 
@@ -131,10 +132,11 @@ int main() {
 		for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
 			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
 		}
+		loopcount = 0;
 		QuickSort(targetedArray,0,numberOfData-1);
 		//횟수 저장
 		
-		
+		loopcount = 0;
 		//wost 배열 생성할수도 있으나 기존거 재탕
 		QuickSort(targetedArray, 0, numberOfData - 1);
 		//횟수 저장
