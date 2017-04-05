@@ -113,7 +113,7 @@ int main() {
 	inputstream = fopen("input1.txt", "r");  // open input1.txt with "r" mode through inputstream
 	fscanf(inputstream, "%d", &repeatcount);  // read first line and save value at repeatcount
 
-	printf("%20s%20s%20s\n", "", "rand_Merge", "worst_Merge", "rand_Quick", "worst_Quick\n");
+	printf("rand_Merge    worst_Merge    rand_Quick    worst_Quick");
 	printf("---------------------------------------------------------------------------\n");
 
 	while (!feof(inputstream)) {
@@ -144,6 +144,8 @@ int main() {
 		printf("%d", numberOfData);
 		printf("%16d", avgMsortSum / 10);
 		printf("%16d", worstMsortSum / 10);
+		avgMsort = 0;
+		worstMsort = 0;
 		loopcount = 0;
 
 
@@ -165,6 +167,8 @@ int main() {
 		}
 		printf("%16d", avgQsortSum / 10);
 		printf("%16d\n", worstQsortSum / 10);
+		avgQsort = 0;
+		worstQsort = 0;
 		loopcount = 0;
 		free(targetedArray);//free allocted memories
 
