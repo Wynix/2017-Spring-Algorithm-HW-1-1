@@ -31,7 +31,7 @@ int Partition(int *data, int left, int right, int pivot) {
 		}
 		loopcount++;
 	}
-	
+
 	/* swap the stored index with the right most
 	* (bring the pivot back)
 	*/
@@ -97,64 +97,86 @@ void MergeSort(int *A, int n) {
 
 int main() {
 
-	int repeatcount;           // # of experiment for mergesort, quicksort
-	int numberOfData;
-	int rangeOfArray;		
-	int *targetedArray;
-	int n;
+	int repeatcount;        // repeat time of every sort
+	int numberOfData;		// scale of data
+	int rangeOfArray;		// indicator for size of array
+	int *targetedArray;		// sorted array
+	int n;					// 'for' function indicator
+	int avgMsortSum;
+	int worstMsortSum;
+	int avgQsortSum;
+	int worstQsortSum;
 	//float algorithmcost[6][4];
-	
-
-	FILE* pFile;         // Pointer for file `input1.txt`
-	pFile = fopen("input1.txt", "r");  // Open `input1.txt` via `pFile` with "r" mode
-	fscanf(pFile, "%d", &repeatcount);       // read first line to know how many we have to iterate same experiment
-	for (n = 0; n < repeatcount; n++) {
-		fscanf(pFile, "%d", &numberOfData);//데이터갯수를 numberOfData에 저장
-
-		targetedArray = malloc(sizeof(int)*numberOfData); //동적 할당 배열 생성
 
 
-		//난수를 생성하고, 입력한다.
-		srand(time(NULL));
-		for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
-			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
-		} //numberOfData 크기의 행렬 targetedArray에 1부터 numberOfData까지의 자연수가 들어감.
-		
-		loopcount = 0;
-		MergeSort(targetedArray, numberOfData);
-		printf("%15d", loopcount);//시행횟수 저장
-		//worst배열 생성 :정렬된 배열을 사용하자. : targetedArray 재활용
-		loopcount = 0;
-		MergeSort(targetedArray, numberOfData);
-		//시행횟수 저장
+	FILE* inputstream;         // make a pointer for 'input1.txt'
+	inputstream = fopen("input1.txt", "r");  // open input1.txt with "r" mode through inputstream
+	fscanf(inputstream, "%d", &repeatcount);  // read first line and save value at repeatcount
 
-		//numberOfData길이의 랜덤배열 생성
-		for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
-			targetedArray[rangeOfArray] = rand() % numberOfData + 1;
+	printf("%20s%20s%20s%20s%20s\n", "", "rand_Merge", "worst_Merge", "rand_Quick", "worst_Quick\n");
+	printf("---------------------------------------------------------------------------");
+
+	while (!feof(inputstream)) {
+		fscanf(inputstream, "%d", &numberOfData);//
+
+		targetedArray = malloc(sizeof(int)*numberOfData); //allocation array
+
+		for (n = 0; n < repeatcount; n++){
+			//make random number and input it
+			srand(time(NULL));
+			for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
+				targetedArray[rangeOfArray] = rand() % numberOfData + 1;
+			} //targetedArray has size of numberOfData with random order
+
+			MergeSort(targetedArray, numberOfData);  //for avearge case of Msort
+
+			avgMsortSum += loopcount;
+			loopcount = 0;
+
+
+			MergeSort(targetedArray, numberOfData); //for worst case of Msort
+
+			worstMsortSum += loopcount;
+			loopcount = 0;
+
 		}
+		printf_s("%16d", avgMsortSum / 10);
+		printf_s("%16d", worstMsortSum / 10);
 		loopcount = 0;
-		QuickSort(targetedArray,0,numberOfData-1);
-		//횟수 저장
-		
+
+
+		for (n = 0; n < repeatcount; n++){
+			//remake array with random order
+			for (rangeOfArray = 0; rangeOfArray < numberOfData; rangeOfArray++) {
+				targetedArray[rangeOfArray] = rand() % numberOfData + 1;
+			}
+			QuickSort(targetedArray, 0, numberOfData - 1);  //for avarage case of Qsort
+
+			avgQsortSum += loopcount;
+			loopcount = 0;
+
+			//use sorted array as worst case
+			QuickSort(targetedArray, 0, numberOfData - 1);  //for worst case of Qsort
+
+			worstQsortSum += loopcount;
+			loopcount = 0;
+		}
+		printf_s("%16d", avgQsortSum / 10);
+		printf_s("%16d\n", worstQsortSum / 10);
 		loopcount = 0;
-		//wost 배열 생성할수도 있으나 기존거 재탕
-		QuickSort(targetedArray, 0, numberOfData - 1);
-		//횟수 저장
+		free(targetedArray);//free allocted memories
 
-		free(targetedArray);//랜덤배열 동적할당 해제
 
-		//각 횟수를 다른 곳에 저장
 
-	
+
 	}
 
 
-	fclose(pFile); // Close access for `input1.txt` via file pointer `pFile`
+	fclose(inputstream); // close stream
 
 
 
-	printf("%18s%18s%18s%18s%18s\n", "", "rand_Merge", "worst_Merge", "rand_Quick", "worst_Quick");
-	puts("--------------------------------------------------------------------------------------------");
-	
+
+
 	return 0;
 }
