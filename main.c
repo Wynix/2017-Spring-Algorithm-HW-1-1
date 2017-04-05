@@ -102,11 +102,11 @@ int main() {
 	int rangeOfArray;		// indicator for size of array
 	int *targetedArray;		// sorted array
 	int n;					// 'for' function indicator
-	int avgMsortSum;
-	int worstMsortSum;
-	int avgQsortSum;
-	int worstQsortSum;
-	//float algorithmcost[6][4];
+	int avgMsortSum;		// loopcount for average Merge Sort
+	int worstMsortSum;		// loopcount for worst Merge Sort
+	int avgQsortSum;		// loopcount for average Quick Sort
+	int worstQsortSum;		// loopcount for worst Quick Sort
+
 
 
 	FILE* inputstream;         // make a pointer for 'input1.txt'
@@ -140,6 +140,7 @@ int main() {
 			loopcount = 0;
 
 		}
+		printf("%d", numberOfData);
 		printf("%16d", avgMsortSum / 10);
 		printf("%16d", worstMsortSum / 10);
 		loopcount = 0;
@@ -179,4 +180,4 @@ int main() {
 
 
 	return 0;
-}}
+}
