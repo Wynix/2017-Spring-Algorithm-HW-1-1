@@ -91,7 +91,7 @@ int main() {
 	int numberOfData;		// scale of data
 	int rangeOfArray;		// indicator for size of array
 	int *targetedArray;		// sorted array
-	int n;				// 'for' function indicator
+	int n;					// 'for' function indicator
 	int avgMsortSum;		// loopcount for average Merge Sort
 	int worstMsortSum;		// loopcount for worst Merge Sort
 	int avgQsortSum;		// loopcount for average Quick Sort
